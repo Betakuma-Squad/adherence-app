@@ -1,4 +1,4 @@
-package com.squad.betakua.adherence_app;
+package com.squad.betakuma.adherence_app;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

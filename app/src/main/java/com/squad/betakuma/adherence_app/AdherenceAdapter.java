@@ -1,4 +1,4 @@
-package com.squad.betakua.adherence_app;
+package com.squad.betakuma.adherence_app;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
