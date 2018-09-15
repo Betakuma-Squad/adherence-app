@@ -9,27 +9,45 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squad.betakuma.adherence_app.MedicationAdapter;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import lombok.Getter;
 import lombok.NonNull;
 
 public class MedicationManager {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final ArrayList<Prescription> prescriptions = new ArrayList<>();
-    private final MedicationAdapter listener;
+    private final ArrayList<DataListener> listeners = new ArrayList<>();
 
-    public MedicationManager(@NonNull final String id, @NonNull final MedicationAdapter listener) {
+    private static MedicationManager instance = null;
+
+    private MedicationManager(@NonNull final String id) {
         Log.d("DEBUG", "THIS IS THE ID: " + id);
-        this.listener = listener;
         reloadData(id);
+    }
+
+    public static MedicationManager getInstance(@NonNull final String id) {
+        if (instance == null) {
+            instance = new MedicationManager(id);
+        }
+        return instance;
     }
 
     // get the backing array of prescription data
     public Prescription[] getDataset() {
         Prescription[] prescriptionsArray = {};
         return prescriptions.toArray(prescriptionsArray);
+    }
+
+    public void registerListener(DataListener listener) {
+        listeners.add(listener);
+    }
+
+    public void deregisterListener(DataListener listener) {
+        listeners.remove(listener);
     }
 
     // reload data from Firebase
@@ -91,7 +109,9 @@ public class MedicationManager {
                                         doc.getData()),
                                 instructions,
                                 surveyResponses));
-                        listener.onDataUpdate();
+                        for (DataListener listener : listeners) {
+                            listener.onDataUpdate();
+                        }
                         Log.d("DEBUG", prescriptions.toString());
                     } else {
                         // TODO error handling

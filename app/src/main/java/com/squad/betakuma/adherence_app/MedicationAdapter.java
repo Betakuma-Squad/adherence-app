@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.squad.betakuma.adherence_app.SwipableCards.MedicationDetailActivity;
+import com.squad.betakuma.adherence_app.data_model.DataListener;
 import com.squad.betakuma.adherence_app.data_model.Medication;
 import com.squad.betakuma.adherence_app.data_model.MedicationManager;
 import com.squad.betakuma.adherence_app.data_model.Prescription;
@@ -21,7 +22,7 @@ import lombok.NonNull;
  * Created by sherryuan on 2018-09-14.
  */
 
-public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.AdherenceViewHolder> {
+public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.AdherenceViewHolder> implements DataListener {
     public Context mContext;
     final private MedicationManager manager;
     private Prescription[] mDataset;
@@ -44,7 +45,8 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Ad
     // Provide a suitable constructor (depends on the kind of dataset)
     public MedicationAdapter(Context context) {
         mContext = context;
-        manager = new MedicationManager(Installation.id(context), this);
+        manager = MedicationManager.getInstance(Installation.id(context));
+        manager.registerListener(this);
         mDataset = manager.getDataset();
     }
 
