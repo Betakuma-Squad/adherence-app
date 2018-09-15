@@ -9,10 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.squad.betakuma.adherence_app.DataModel.Medication;
-import com.squad.betakuma.adherence_app.DataModel.MedicationManager;
-import com.squad.betakuma.adherence_app.DataModel.Prescription;
 import com.squad.betakuma.adherence_app.SwipableCards.MedicationDetailActivity;
+import com.squad.betakuma.adherence_app.data_model.Medication;
+import com.squad.betakuma.adherence_app.data_model.MedicationManager;
+import com.squad.betakuma.adherence_app.data_model.Prescription;
+import com.squad.betakuma.adherence_app.utilities.Installation;
 
 /**
  * Created by sherryuan on 2018-09-14.
@@ -40,7 +41,7 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Ad
     // Provide a suitable constructor (depends on the kind of dataset)
     public MedicationAdapter(Context context) {
         mContext = context;
-        MedicationManager manager = new MedicationManager();
+        MedicationManager manager = new MedicationManager(Installation.id(context));
         mDataset = manager.getDataset();
 
     }
