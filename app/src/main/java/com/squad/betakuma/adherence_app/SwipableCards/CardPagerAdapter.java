@@ -91,6 +91,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
                 // TODO: make this less hacky
                 if (view.getPaddingLeft() > 0) {
                     view.setPadding(-30, 0, -30, 0);
+
                 } else {
                     view.setPadding(mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), mContext.getResources().getDimensionPixelSize(R.dimen.card_padding));
                 }
