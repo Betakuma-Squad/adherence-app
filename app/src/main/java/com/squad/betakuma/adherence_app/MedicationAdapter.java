@@ -63,7 +63,7 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Ad
         // - replace the contents of the view with that element
         Prescription prescription = mDataset[position];
         Medication medication = prescription.getMedication();
-        holder.mTextView.setText(medication.genericName + " (" + medication.brandName + ", " + medication.DIN + ")");
+        holder.mTextView.setText(medication.getGenericName() + " (" + medication.getBrandName() + ", " + medication.DIN + ")");
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
