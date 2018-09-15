@@ -15,6 +15,4 @@ public class Medication {
     @NonNull final String dose;
     @NonNull final String description;
     @NonNull final Map<SideEffectRarity, ArrayList<String>> sideEffects;
-
-
 }
