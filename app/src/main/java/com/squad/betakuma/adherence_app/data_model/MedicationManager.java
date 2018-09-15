@@ -7,6 +7,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squad.betakuma.adherence_app.MedicationAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,10 +16,13 @@ import java.util.Map;
 import lombok.NonNull;
 
 public class MedicationManager {
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private ArrayList<Prescription> prescriptions = new ArrayList<>();
+    private final FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private final ArrayList<Prescription> prescriptions = new ArrayList<>();
+    private final MedicationAdapter listener;
 
-    public MedicationManager(@NonNull final String id) {
+    public MedicationManager(@NonNull final String id, @NonNull final MedicationAdapter listener) {
+        Log.d("DEBUG", "THIS IS THE ID: " + id);
+        this.listener = listener;
         reloadData(id);
     }
 
@@ -38,7 +42,13 @@ public class MedicationManager {
                 if (task.isSuccessful()) {
                     DocumentSnapshot doc = task.getResult();
                     if (doc.exists()) {
-                        prescriptionFromFirebase(doc.getData());
+                        Log.d("DEBUG", doc.getData().toString());
+                        ArrayList prescriptionsFirebase = (ArrayList) doc.getData().get("prescriptions");
+                        for (Object o : prescriptionsFirebase) {
+                            Log.d("DEBUG", o.toString());
+                            // TODO FIX THIS
+                            prescriptionFromFirebase((Map) o);
+                        }
                     } else {
                         // TODO error handling
                     }
@@ -51,11 +61,11 @@ public class MedicationManager {
 
     // asynchronously convert from Firebase results to Prescription POJO
     // NOTE: this is asynchronous because it has to look up the attached medicine in Firebase
-    private void prescriptionFromFirebase(@NonNull final Map<String, Object> firebaseObject) {
-        final int quantity = (int) firebaseObject.get("quantity");
-        final int totalQuantity = (int) firebaseObject.get("totalQuantity");
-        final int refills = (int) firebaseObject.get("refills");
-        final int totalRefills = (int) firebaseObject.get("totalRefills");
+    private void prescriptionFromFirebase(@NonNull final Map firebaseObject) {
+        final long quantity = (long) firebaseObject.get("quantity");
+        final long totalQuantity = (long) firebaseObject.get("totalQuantity");
+        final long refills = (long) firebaseObject.get("refills");
+        final long totalRefills = (long) firebaseObject.get("totalRefills");
         @NonNull final String instructions = (String) firebaseObject.get("instructions");
         @NonNull final ArrayList surveyResponsesFirebase = (ArrayList) firebaseObject.get("surveyResponses");
         final ArrayList<SurveyResponse> surveyResponses = new ArrayList<>();
@@ -65,8 +75,8 @@ public class MedicationManager {
             final String response = (String) responseFirebase.get("response");
             surveyResponses.add(new SurveyResponse(question, response));
         }
-        final int din = (int) firebaseObject.get("medication");
-        DocumentReference docRef = db.collection("medications").document(Integer.toString(din));
+        final String din = (String) firebaseObject.get("medication");
+        DocumentReference docRef = db.collection("medications").document(din);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -77,11 +87,12 @@ public class MedicationManager {
                                 totalQuantity,
                                 refills,
                                 totalRefills,
-                                medicationFromFirebase(din,
+                                medicationFromFirebase(Integer.parseInt(din),
                                         doc.getData()),
                                 instructions,
                                 surveyResponses));
-                        Log.d("debug", doc.getData().toString());
+                        listener.onDataUpdate();
+                        Log.d("DEBUG", prescriptions.toString());
                     } else {
                         // TODO error handling
                     }

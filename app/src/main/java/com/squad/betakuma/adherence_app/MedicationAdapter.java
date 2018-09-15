@@ -21,6 +21,7 @@ import com.squad.betakuma.adherence_app.utilities.Installation;
 
 public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.AdherenceViewHolder> {
     public Context mContext;
+    final private MedicationManager manager;
     private Prescription[] mDataset;
 
     // Provide a reference to the views for each data item
@@ -41,9 +42,13 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Ad
     // Provide a suitable constructor (depends on the kind of dataset)
     public MedicationAdapter(Context context) {
         mContext = context;
-        MedicationManager manager = new MedicationManager(Installation.id(context));
+        manager = new MedicationManager(Installation.id(context), this);
         mDataset = manager.getDataset();
+    }
 
+    public void onDataUpdate() {
+        mDataset = manager.getDataset();
+        notifyDataSetChanged();
     }
 
     // Create new views (invoked by the layout manager)
