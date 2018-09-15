@@ -15,6 +15,8 @@ import com.squad.betakuma.adherence_app.data_model.MedicationManager;
 import com.squad.betakuma.adherence_app.data_model.Prescription;
 import com.squad.betakuma.adherence_app.utilities.Installation;
 
+import lombok.NonNull;
+
 /**
  * Created by sherryuan on 2018-09-14.
  */
@@ -53,10 +55,10 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Ad
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MedicationAdapter.AdherenceViewHolder onCreateViewHolder(ViewGroup parent,
+    public MedicationAdapter.AdherenceViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
                                                                     int viewType) {
         // create a new view
-        View v =  LayoutInflater.from(parent.getContext())
+        View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.view_adherence_list_card, parent, false);
         AdherenceViewHolder vh = new AdherenceViewHolder(v);
         return vh;
@@ -69,7 +71,8 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Ad
         // - replace the contents of the view with that element
         Prescription prescription = mDataset[position];
         Medication medication = prescription.getMedication();
-        holder.mTextView.setText(medication.getGenericName() + " (" + medication.getBrandName() + ", " + medication.DIN + ")");
+        final String displayString = medication.getGenericName() + " (" + medication.getBrandName() + ", " + medication.getDIN() + ")";
+        holder.mTextView.setText(displayString);
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
