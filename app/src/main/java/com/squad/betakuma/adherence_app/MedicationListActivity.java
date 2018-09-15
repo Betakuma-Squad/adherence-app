@@ -5,12 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MedicationListActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    String[] myDataset = new String[4];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +29,8 @@ public class MedicationListActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         // specify an adapter (see also next example)
-        myDataset[0] = "hello";
-        myDataset[1] = "world";
-        mAdapter = new MedicationAdapter(this, myDataset);
+
+        mAdapter = new MedicationAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
     }
 }
