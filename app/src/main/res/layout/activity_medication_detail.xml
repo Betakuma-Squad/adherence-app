@@ -6,8 +6,6 @@
     android:clipToPadding="false"
     android:overScrollMode="never"
     android:paddingBottom="30dp"
-    android:paddingEnd="@dimen/card_padding"
-    android:paddingLeft="@dimen/card_padding"
-    android:paddingRight="@dimen/card_padding"
-    android:paddingStart="@dimen/card_padding"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
     xmlns:android="http://schemas.android.com/apk/res/android" />

@@ -29,8 +29,9 @@ public class MedicationDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_medication_detail);
 
         mViewPager = findViewById(R.id.viewPager);
+        mViewPager.setPageMargin(-30);
 
-        mCardAdapter = new CardPagerAdapter();
+        mCardAdapter = new CardPagerAdapter(this, mViewPager);
         mCardAdapter.addCardItem(new CardItem(R.string.title_1, R.string.text_1));
         mCardAdapter.addCardItem(new CardItem(R.string.title_2, R.string.text_1));
         mCardAdapter.addCardItem(new CardItem(R.string.title_3, R.string.text_1));

@@ -19,6 +19,9 @@ public class CardItem {
     public boolean isExpanded() {
         return isExpanded;
     }
+    public void setExpanded(boolean isExpanded) {
+        this.isExpanded = isExpanded;
+    }
 
     public void setExpandableContent(LinearLayout expandableContent) {
         this.expandableContent = expandableContent;
