@@ -9,13 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.squad.betakuma.adherence_app.DataModel.Medication;
+import com.squad.betakuma.adherence_app.DataModel.MedicationManager;
+import com.squad.betakuma.adherence_app.DataModel.Prescription;
+
 /**
  * Created by sherryuan on 2018-09-14.
  */
 
 public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.AdherenceViewHolder> {
     public Context mContext;
-    private String[] mDataset;
+    private Prescription[] mDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -33,9 +37,11 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Ad
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MedicationAdapter(Context context, String[] myDataset) {
+    public MedicationAdapter(Context context) {
         mContext = context;
-        mDataset = myDataset;
+        MedicationManager manager = new MedicationManager();
+        mDataset = manager.getDataset();
+
     }
 
     // Create new views (invoked by the layout manager)
@@ -54,9 +60,12 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Ad
     public void onBindViewHolder(AdherenceViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.mTextView.setText(mDataset[position]);
+        Prescription prescription = mDataset[position];
+        Medication medication = prescription.getMedication();
+        holder.mTextView.setText(medication.genericName + " (" + medication.brandName + ", " + medication.DIN + ")");
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 Intent medicationDetailActivityIntent = new Intent(mContext, MedicationDetailActivity.class);
                 // TODO: pass in medication info as extra
                 mContext.startActivity(medicationDetailActivityIntent);
