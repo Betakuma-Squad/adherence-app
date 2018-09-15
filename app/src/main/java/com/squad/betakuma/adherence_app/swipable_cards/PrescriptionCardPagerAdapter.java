@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.squad.betakuma.adherence_app.R;
 import com.squad.betakuma.adherence_app.data_model.DataListener;
 import com.squad.betakuma.adherence_app.data_model.DataManager;
+import com.squad.betakuma.adherence_app.data_model.Prescription;
 import com.squad.betakuma.adherence_app.utilities.Installation;
 
 import java.util.ArrayList;
@@ -35,13 +36,9 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
         mViews = new ArrayList<>();
         manager = DataManager.getInstance(Installation.id(context));
         manager.registerListener(this);
-//        for (Prescription prescription : manager.getDataset()) {
-//            addPrescriptionCardItem(prescription);
-//        }
-        addCardItem(new PrescriptionCardItem(R.string.title_1, R.string.text_1));
-        addCardItem(new PrescriptionCardItem(R.string.title_2, R.string.text_1));
-        addCardItem(new PrescriptionCardItem(R.string.title_3, R.string.text_1));
-        addCardItem(new PrescriptionCardItem(R.string.title_4, R.string.text_1));
+        for (Prescription prescription : manager.getDataset()) {
+            addPrescriptionCardItem(prescription);
+        }
     }
 
     public void addCardItem(PrescriptionCardItem item) {
@@ -49,10 +46,10 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
         mData.add(item);
     }
 
-//    public void addPrescriptionCardItem(Prescription prescription) {
-//        mViews.add(null);
-//        mData.add(...)
-//    }
+    public void addPrescriptionCardItem(Prescription prescription) {
+        mViews.add(null);
+        mData.add(new PrescriptionCardItem(prescription));
+    }
 
     public float getBaseElevation() {
         return mBaseElevation;
