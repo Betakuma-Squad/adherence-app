@@ -29,9 +29,12 @@ public class MedicationManager {
                         "\n" +
                         "Ramipril is also used to lessen the chance of heart attacks or strokes in patients 55 years of age or older and have serious heart disease. \n",
                 ramiprilSideEffects);
-        prescriptions[0] = new Prescription(ramipril,
-                "",
-                "",
+        prescriptions[0] = new Prescription(
+                0,
+                0,
+                0,
+                0,
+                ramipril,
                 "Take one capsule once daily",
                 new ArrayList<SurveyResponse>());
     }

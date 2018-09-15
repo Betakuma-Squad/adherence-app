@@ -8,9 +8,11 @@ import lombok.NonNull;
 @Data
 // data model representation of a single prescription
 public class Prescription {
+    final int quantity;
+    final int totalQuantity;
+    final int refills;
+    final int totalRefills;
     @NonNull final Medication medication;
-    @NonNull final String quantity;
-    @NonNull final String refills;
     @NonNull final String instructions;
     @NonNull final List<SurveyResponse> surveyResponses;
 }
