@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-public class MainActivity extends AppCompatActivity {
+public class MedicationListActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_medication_list);
         mRecyclerView = findViewById(R.id.my_recycler_view);
 
         // use this setting to improve performance if you know that changes
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         // specify an adapter (see also next example)
         myDataset[0] = "hello";
         myDataset[1] = "world";
-        mAdapter = new AdherenceAdapter(myDataset);
+        mAdapter = new MedicationAdapter(this, myDataset);
         mRecyclerView.setAdapter(mAdapter);
     }
 }
