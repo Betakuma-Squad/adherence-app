@@ -9,7 +9,7 @@ import lombok.NonNull;
 @Data
 // data model representation of a single medication
 public class Medication {
-    final public int DIN;
+    @NonNull final String DIN;
     @NonNull final String genericName;
     @NonNull final String brandName;
     @NonNull final String dose;
