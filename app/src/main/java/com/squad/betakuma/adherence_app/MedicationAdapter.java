@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.squad.betakuma.adherence_app.DataModel.Medication;
 import com.squad.betakuma.adherence_app.DataModel.MedicationManager;
 import com.squad.betakuma.adherence_app.DataModel.Prescription;
+import com.squad.betakuma.adherence_app.SwipableCards.MedicationDetailActivity;
 
 /**
  * Created by sherryuan on 2018-09-14.
@@ -29,7 +30,7 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Ad
         public CardView mCardView;
         public TextView mTextView;
 
-        public AdherenceViewHolder(CardView v) {
+        public AdherenceViewHolder(View v) {
             super(v);
             mCardView = v.findViewById(R.id.card_view);
             mTextView = v.findViewById(R.id.info_text);
@@ -49,7 +50,7 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Ad
     public MedicationAdapter.AdherenceViewHolder onCreateViewHolder(ViewGroup parent,
                                                                     int viewType) {
         // create a new view
-        CardView v = (CardView) LayoutInflater.from(parent.getContext())
+        View v =  LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.view_adherence_list_card, parent, false);
         AdherenceViewHolder vh = new AdherenceViewHolder(v);
         return vh;

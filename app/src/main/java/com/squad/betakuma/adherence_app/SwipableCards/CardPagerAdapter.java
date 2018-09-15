@@ -1,14 +1,22 @@
-package com.squad.betakuma.adherence_app;
+package com.squad.betakuma.adherence_app.SwipableCards;
 
+import android.support.transition.TransitionManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.squad.betakuma.adherence_app.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
 
@@ -48,7 +56,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(container.getContext())
-                .inflate(R.layout.adapter, container, false);
+                .inflate(R.layout.cardview_medication, container, false);
         container.addView(view);
         bind(mData.get(position), view);
         CardView cardView = (CardView) view.findViewById(R.id.cardView);
@@ -68,9 +76,18 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter {
         mViews.set(position, null);
     }
 
-    private void bind(CardItem item, View view) {
+    private void bind(final CardItem item, View view) {
         TextView titleTextView = (TextView) view.findViewById(R.id.titleTextView);
         TextView contentTextView = (TextView) view.findViewById(R.id.contentTextView);
+        LinearLayout expandableContent = view.findViewById(R.id.card_expanded_content);
+        item.setExpandableContent(expandableContent);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TransitionManager.beginDelayedTransition((ViewGroup) view);
+                item.toggleExpanded();
+            }
+        });
         titleTextView.setText(item.getTitle());
         contentTextView.setText(item.getText());
     }

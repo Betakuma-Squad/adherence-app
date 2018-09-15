@@ -1,4 +1,4 @@
-package com.squad.betakuma.adherence_app;
+package com.squad.betakuma.adherence_app.SwipableCards;
 
 
 import android.support.v7.widget.CardView;

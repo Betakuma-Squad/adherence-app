@@ -28,7 +28,7 @@ public class MedicationListActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        // specify an adapter (see also next example)
+        // specify an cardview_medication (see also next example)
 
         mAdapter = new MedicationAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
