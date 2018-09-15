@@ -1,4 +1,4 @@
-package com.squad.betakuma.adherence_app.DataModel;
+package com.squad.betakuma.adherence_app.data_model;
 
 public enum SideEffectRarity {
     MoreCommon,
