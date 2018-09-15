@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.squad.betakuma.adherence_app.DataModel.Medication;
 import com.squad.betakuma.adherence_app.DataModel.MedicationManager;
+import com.squad.betakuma.adherence_app.DataModel.Prescription;
 
 /**
  * Created by sherryuan on 2018-09-14.
@@ -18,7 +19,7 @@ import com.squad.betakuma.adherence_app.DataModel.MedicationManager;
 
 public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.AdherenceViewHolder> {
     public Context mContext;
-    private Medication[] mDataset;
+    private Prescription[] mDataset;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -59,7 +60,8 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Ad
     public void onBindViewHolder(AdherenceViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        Medication medication = mDataset[position];
+        Prescription prescription = mDataset[position];
+        Medication medication = prescription.getMedication();
         holder.mTextView.setText(medication.genericName + " (" + medication.brandName + ", " + medication.DIN + ")");
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override

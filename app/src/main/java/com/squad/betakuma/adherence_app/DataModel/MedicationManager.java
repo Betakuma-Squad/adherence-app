@@ -1,15 +1,15 @@
 package com.squad.betakuma.adherence_app.DataModel;
 
-import com.squad.betakuma.adherence_app.DataModel.Medication;
-import com.squad.betakuma.adherence_app.DataModel.SideEffectRarity;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MedicationManager {
-    // get the backing array of Medication data
-    public Medication[] getDataset() {
-        Medication[] dataset = new Medication[1];
+    private Prescription[] prescriptions;
+
+    public MedicationManager() {
+        prescriptions = new Prescription[1];
+
         Map<SideEffectRarity, String[]> ramiprilSideEffects = new HashMap<>();
         String[] moreCommonSideEffects = {"Blurred vision",
                 "Confusion",
@@ -17,8 +17,7 @@ public class MedicationManager {
                 "Sweating",
                 "Unusual tiredness or weakness"};
         ramiprilSideEffects.put(SideEffectRarity.MoreCommon, moreCommonSideEffects);
-        String instructions = "Take one capsule once daily";
-        dataset[0] = new Medication("Ramipril",
+        Medication ramipril = new Medication("Ramipril",
                 "PMS-Ramipril",
                 "02247918",
                 "5mg",
@@ -30,7 +29,16 @@ public class MedicationManager {
                         "\n" +
                         "Ramipril is also used to lessen the chance of heart attacks or strokes in patients 55 years of age or older and have serious heart disease. \n",
                 ramiprilSideEffects);
-        return dataset;
+        prescriptions[0] = new Prescription(ramipril,
+                "",
+                "",
+                "Take one capsule once daily",
+                new ArrayList<SurveyResponse>());
+    }
+
+    // get the backing array of prescription data
+    public Prescription[] getDataset() {
+        return prescriptions;
     }
 
     // reload data from Firebase
