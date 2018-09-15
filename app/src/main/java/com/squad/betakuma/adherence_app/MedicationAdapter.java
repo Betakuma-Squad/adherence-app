@@ -9,10 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.squad.betakuma.adherence_app.DataModel.Medication;
-import com.squad.betakuma.adherence_app.DataModel.MedicationManager;
-import com.squad.betakuma.adherence_app.DataModel.Prescription;
 import com.squad.betakuma.adherence_app.SwipableCards.MedicationDetailActivity;
+import com.squad.betakuma.adherence_app.data_model.Medication;
+import com.squad.betakuma.adherence_app.data_model.MedicationManager;
+import com.squad.betakuma.adherence_app.data_model.Prescription;
+import com.squad.betakuma.adherence_app.utilities.Installation;
 
 /**
  * Created by sherryuan on 2018-09-14.
@@ -20,6 +21,7 @@ import com.squad.betakuma.adherence_app.SwipableCards.MedicationDetailActivity;
 
 public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.AdherenceViewHolder> {
     public Context mContext;
+    final private MedicationManager manager;
     private Prescription[] mDataset;
 
     // Provide a reference to the views for each data item
@@ -40,9 +42,13 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Ad
     // Provide a suitable constructor (depends on the kind of dataset)
     public MedicationAdapter(Context context) {
         mContext = context;
-        MedicationManager manager = new MedicationManager();
+        manager = new MedicationManager(Installation.id(context), this);
         mDataset = manager.getDataset();
+    }
 
+    public void onDataUpdate() {
+        mDataset = manager.getDataset();
+        notifyDataSetChanged();
     }
 
     // Create new views (invoked by the layout manager)
@@ -63,7 +69,7 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Ad
         // - replace the contents of the view with that element
         Prescription prescription = mDataset[position];
         Medication medication = prescription.getMedication();
-        holder.mTextView.setText(medication.genericName + " (" + medication.brandName + ", " + medication.DIN + ")");
+        holder.mTextView.setText(medication.getGenericName() + " (" + medication.getBrandName() + ", " + medication.DIN + ")");
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
