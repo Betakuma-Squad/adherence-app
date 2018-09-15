@@ -17,9 +17,9 @@ public class MedicationManager {
                 "Sweating",
                 "Unusual tiredness or weakness"};
         ramiprilSideEffects.put(SideEffectRarity.MoreCommon, moreCommonSideEffects);
-        Medication ramipril = new Medication("Ramipril",
+        Medication ramipril = new Medication(2247918,
+                "Ramipril",
                 "PMS-Ramipril",
-                "02247918",
                 "5mg",
                 "Ramipril is used alone or together with other medicines to treat high blood pressure (hypertension). High blood pressure adds to the workload of the heart and arteries. If it continues for a long time, the heart and arteries may not function properly. This can damage the blood vessels of the brain, heart, and kidneys, resulting in a stroke, heart failure, or kidney failure. Lowering blood pressure can reduce the risk of strokes and heart attacks.\n" +
                         "\n" +
