@@ -3,6 +3,8 @@ package com.squad.betakuma.adherence_app.data_model;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -14,16 +16,20 @@ import java.util.Map;
 
 import lombok.NonNull;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class DataManager {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final ArrayList<Prescription> prescriptions = new ArrayList<>();
     private final ArrayList<DataListener> listeners = new ArrayList<>();
+    private String userId = "";
 
     private static DataManager instance = null;
 
     private DataManager(@NonNull final String id) {
         Log.d("DEBUG", "THIS IS THE ID: " + id);
-        reloadData(id);
+        userId = id;
+        reloadData();
     }
 
     public static DataManager getInstance(@NonNull final String id) {
@@ -39,6 +45,7 @@ public class DataManager {
         return prescriptions.toArray(prescriptionsArray);
     }
 
+
     public void registerListener(DataListener listener) {
         listeners.add(listener);
     }
@@ -47,10 +54,28 @@ public class DataManager {
         listeners.remove(listener);
     }
 
+    public void addPrescription(Prescription prescription) {
+        db.collection("users").document(userId).collection("prescriptions").add(prescription)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        reloadData();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error writing document", e);
+                    }
+                });;
+        reloadData();
+
+    }
+
     // reload data from Firebase
-    public void reloadData(@NonNull final String id) {
+    public void reloadData() {
         prescriptions.clear();
-        DocumentReference docRef = db.collection("users").document(id);
+        DocumentReference docRef = db.collection("users").document(userId);
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -102,7 +127,7 @@ public class DataManager {
                                 totalQuantity,
                                 refills,
                                 totalRefills,
-                                medicationFromFirebase(Integer.parseInt(din),
+                                medicationFromFirebase(din,
                                         doc.getData()),
                                 instructions,
                                 surveyResponses));
@@ -121,7 +146,7 @@ public class DataManager {
     }
 
     // convert from Firebase object to Medication POJO
-    private static Medication medicationFromFirebase(final int DIN,
+    private static Medication medicationFromFirebase(final String DIN,
                                                      @NonNull final Map<String, Object> firebaseObject) {
         // TODO error handling
         @NonNull final String genericName = (String) firebaseObject.get("genericName");

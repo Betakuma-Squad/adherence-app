@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.squad.betakuma.adherence_app;
+package com.squad.betakuma.adherence_app.ocr;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

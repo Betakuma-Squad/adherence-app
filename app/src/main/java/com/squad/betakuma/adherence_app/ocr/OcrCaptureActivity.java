@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.squad.betakuma.adherence_app;
+package com.squad.betakuma.adherence_app.ocr;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -42,6 +42,7 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.text.TextRecognizer;
+import com.squad.betakuma.adherence_app.R;
 import com.squad.betakuma.adherence_app.ui.camera.CameraSource;
 import com.squad.betakuma.adherence_app.ui.camera.CameraSourcePreview;
 import com.squad.betakuma.adherence_app.ui.camera.GraphicOverlay;
@@ -53,7 +54,7 @@ import java.io.IOException;
  * rear facing camera. During detection overlay graphics are drawn to indicate the position,
  * size, and contents of each TextBlock.
  */
-public final class OcrCaptureActivity extends AppCompatActivity {
+public final class OcrCaptureActivity extends AppCompatActivity implements OcrPrescriptionListener{
     private static final String TAG = "OcrCaptureActivity";
 
     // Intent request code to handle updating play services if needed.
@@ -105,9 +106,9 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         gestureDetector = new GestureDetector(this, new CaptureGestureListener());
         scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
 
-        Snackbar.make(graphicOverlay, "Tap to Speak. Pinch/Stretch to zoom",
-                Snackbar.LENGTH_LONG)
-                .show();
+//        Snackbar.make(graphicOverlay, "Tap to Speak. Pinch/Stretch to zoom",
+//                Snackbar.LENGTH_LONG)
+//                .show();
 
         // TODO: Set up the Text To Speech engine.
     }
@@ -170,6 +171,8 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         TextRecognizer textRecognizer = new TextRecognizer.Builder(context).build();
 
         // TODO: Set the TextRecognizer's Processor.
+
+        textRecognizer.setProcessor(new OcrDetectorProcessor(this, this, graphicOverlay));
 
         // TODO: Check if the TextRecognizer is operational.
 
@@ -317,6 +320,11 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     private boolean onTap(float rawX, float rawY) {
         // TODO: Speak the text when the user taps on screen.
         return false;
+    }
+
+    @Override
+    public void onPrescriptionFound() {
+        finish();
     }
 
     private class CaptureGestureListener extends GestureDetector.SimpleOnGestureListener {
