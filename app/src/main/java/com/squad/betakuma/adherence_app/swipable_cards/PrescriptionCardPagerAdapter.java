@@ -19,7 +19,7 @@ import com.squad.betakuma.adherence_app.utilities.Installation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrescriptionPrescriptionCardPagerAdapter extends PagerAdapter implements PrescriptionCardAdapter, DataListener {
+public class PrescriptionCardPagerAdapter extends PagerAdapter implements PrescriptionCardAdapter, DataListener {
 
     private Context mContext;
     private ViewPager mParentViewPager;
@@ -28,7 +28,7 @@ public class PrescriptionPrescriptionCardPagerAdapter extends PagerAdapter imple
     private float mBaseElevation;
     private DataManager manager;
 
-    public PrescriptionPrescriptionCardPagerAdapter(Context context, ViewPager viewPager) {
+    public PrescriptionCardPagerAdapter(Context context, ViewPager viewPager) {
         mContext = context;
         mParentViewPager = viewPager;
         mData = new ArrayList<>();

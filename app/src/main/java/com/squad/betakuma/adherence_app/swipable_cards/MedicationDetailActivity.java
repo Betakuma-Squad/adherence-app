@@ -14,7 +14,7 @@ import com.squad.betakuma.adherence_app.ShadowTransformer;
 public class MedicationDetailActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
-    private PrescriptionPrescriptionCardPagerAdapter mCardAdapter;
+    private PrescriptionCardPagerAdapter mCardAdapter;
     private ShadowTransformer mCardShadowTransformer;
 
     @Override
@@ -25,7 +25,7 @@ public class MedicationDetailActivity extends AppCompatActivity {
         mViewPager = findViewById(R.id.viewPager);
         mViewPager.setPageMargin(-30);
 
-        mCardAdapter = new PrescriptionPrescriptionCardPagerAdapter(this, mViewPager);
+        mCardAdapter = new PrescriptionCardPagerAdapter(this, mViewPager);
 
         mCardShadowTransformer = new ShadowTransformer(mViewPager, mCardAdapter);
 
