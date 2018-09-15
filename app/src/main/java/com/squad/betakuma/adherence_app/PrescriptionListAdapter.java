@@ -9,10 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.squad.betakuma.adherence_app.SwipableCards.MedicationDetailActivity;
+import com.squad.betakuma.adherence_app.swipable_cards.MedicationDetailActivity;
 import com.squad.betakuma.adherence_app.data_model.DataListener;
 import com.squad.betakuma.adherence_app.data_model.Medication;
-import com.squad.betakuma.adherence_app.data_model.MedicationManager;
+import com.squad.betakuma.adherence_app.data_model.DataManager;
 import com.squad.betakuma.adherence_app.data_model.Prescription;
 import com.squad.betakuma.adherence_app.utilities.Installation;
 
@@ -22,9 +22,9 @@ import lombok.NonNull;
  * Created by sherryuan on 2018-09-14.
  */
 
-public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.AdherenceViewHolder> implements DataListener {
+public class PrescriptionListAdapter extends RecyclerView.Adapter<PrescriptionListAdapter.AdherenceViewHolder> implements DataListener {
     public Context mContext;
-    final private MedicationManager manager;
+    final private DataManager manager;
     private Prescription[] mDataset;
 
     // Provide a reference to the views for each data item
@@ -43,9 +43,9 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Ad
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public MedicationAdapter(Context context) {
+    public PrescriptionListAdapter(Context context) {
         mContext = context;
-        manager = MedicationManager.getInstance(Installation.id(context));
+        manager = DataManager.getInstance(Installation.id(context));
         manager.registerListener(this);
         mDataset = manager.getDataset();
     }
@@ -57,8 +57,8 @@ public class MedicationAdapter extends RecyclerView.Adapter<MedicationAdapter.Ad
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MedicationAdapter.AdherenceViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
-                                                                    int viewType) {
+    public PrescriptionListAdapter.AdherenceViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
+                                                                          int viewType) {
         // create a new view
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.view_adherence_list_card, parent, false);

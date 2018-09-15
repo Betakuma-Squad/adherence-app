@@ -1,4 +1,4 @@
-package com.squad.betakuma.adherence_app.SwipableCards;
+package com.squad.betakuma.adherence_app.swipable_cards;
 
 import android.content.Context;
 import android.support.v7.widget.CardView;
@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 
 import com.squad.betakuma.adherence_app.R;
 
-import static com.squad.betakuma.adherence_app.SwipableCards.CardAdapter.MAX_ELEVATION_FACTOR;
+import static com.squad.betakuma.adherence_app.swipable_cards.PrescriptionCardAdapter.MAX_ELEVATION_FACTOR;
 
 /**
  * Created by sherryuan on 2018-09-15.

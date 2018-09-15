@@ -7,31 +7,28 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.squad.betakuma.adherence_app.MedicationAdapter;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import lombok.Getter;
 import lombok.NonNull;
 
-public class MedicationManager {
+public class DataManager {
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final ArrayList<Prescription> prescriptions = new ArrayList<>();
     private final ArrayList<DataListener> listeners = new ArrayList<>();
 
-    private static MedicationManager instance = null;
+    private static DataManager instance = null;
 
-    private MedicationManager(@NonNull final String id) {
+    private DataManager(@NonNull final String id) {
         Log.d("DEBUG", "THIS IS THE ID: " + id);
         reloadData(id);
     }
 
-    public static MedicationManager getInstance(@NonNull final String id) {
+    public static DataManager getInstance(@NonNull final String id) {
         if (instance == null) {
-            instance = new MedicationManager(id);
+            instance = new DataManager(id);
         }
         return instance;
     }

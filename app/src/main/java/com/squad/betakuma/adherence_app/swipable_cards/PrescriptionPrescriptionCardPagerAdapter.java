@@ -1,4 +1,4 @@
-package com.squad.betakuma.adherence_app.SwipableCards;
+package com.squad.betakuma.adherence_app.swipable_cards;
 
 import android.content.Context;
 import android.support.transition.TransitionManager;
@@ -13,42 +13,38 @@ import android.widget.TextView;
 
 import com.squad.betakuma.adherence_app.R;
 import com.squad.betakuma.adherence_app.data_model.DataListener;
-import com.squad.betakuma.adherence_app.data_model.MedicationManager;
-import com.squad.betakuma.adherence_app.data_model.Prescription;
+import com.squad.betakuma.adherence_app.data_model.DataManager;
 import com.squad.betakuma.adherence_app.utilities.Installation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-
-public class CardPagerAdapter extends PagerAdapter implements CardAdapter, DataListener {
+public class PrescriptionPrescriptionCardPagerAdapter extends PagerAdapter implements PrescriptionCardAdapter, DataListener {
 
     private Context mContext;
     private ViewPager mParentViewPager;
     private List<CardView> mViews;
-    private List<CardItem> mData;
+    private List<PrescriptionCardItem> mData;
     private float mBaseElevation;
-    private MedicationManager manager;
+    private DataManager manager;
 
-    public CardPagerAdapter(Context context, ViewPager viewPager) {
+    public PrescriptionPrescriptionCardPagerAdapter(Context context, ViewPager viewPager) {
         mContext = context;
         mParentViewPager = viewPager;
         mData = new ArrayList<>();
         mViews = new ArrayList<>();
-        manager = MedicationManager.getInstance(Installation.id(context));
+        manager = DataManager.getInstance(Installation.id(context));
         manager.registerListener(this);
 //        for (Prescription prescription : manager.getDataset()) {
 //            addPrescriptionCardItem(prescription);
 //        }
-        addCardItem(new CardItem(R.string.title_1, R.string.text_1));
-        addCardItem(new CardItem(R.string.title_2, R.string.text_1));
-        addCardItem(new CardItem(R.string.title_3, R.string.text_1));
-        addCardItem(new CardItem(R.string.title_4, R.string.text_1));
+        addCardItem(new PrescriptionCardItem(R.string.title_1, R.string.text_1));
+        addCardItem(new PrescriptionCardItem(R.string.title_2, R.string.text_1));
+        addCardItem(new PrescriptionCardItem(R.string.title_3, R.string.text_1));
+        addCardItem(new PrescriptionCardItem(R.string.title_4, R.string.text_1));
     }
 
-    public void addCardItem(CardItem item) {
+    public void addCardItem(PrescriptionCardItem item) {
         mViews.add(null);
         mData.add(item);
     }
@@ -105,7 +101,7 @@ public class CardPagerAdapter extends PagerAdapter implements CardAdapter, DataL
 
     }
 
-    private void bind(final CardItem item, View view) {
+    private void bind(final PrescriptionCardItem item, View view) {
         TextView titleTextView = (TextView) view.findViewById(R.id.titleTextView);
         TextView contentTextView = (TextView) view.findViewById(R.id.contentTextView);
         LinearLayout expandableContent = view.findViewById(R.id.card_expanded_content);

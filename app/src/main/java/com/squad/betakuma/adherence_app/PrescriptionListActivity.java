@@ -5,10 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import java.util.HashMap;
-import java.util.Map;
-
-public class MedicationListActivity extends AppCompatActivity {
+public class PrescriptionListActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -30,7 +27,7 @@ public class MedicationListActivity extends AppCompatActivity {
 
         // specify an cardview_medication (see also next example)
 
-        mAdapter = new MedicationAdapter(this);
+        mAdapter = new PrescriptionListAdapter(this);
         mRecyclerView.setAdapter(mAdapter);
     }
 }

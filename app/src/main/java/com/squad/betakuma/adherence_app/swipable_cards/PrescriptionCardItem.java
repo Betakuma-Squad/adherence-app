@@ -1,17 +1,17 @@
-package com.squad.betakuma.adherence_app.SwipableCards;
+package com.squad.betakuma.adherence_app.swipable_cards;
 
 
 import android.view.View;
 import android.widget.LinearLayout;
 
-public class CardItem {
+public class PrescriptionCardItem {
 
     private boolean isExpanded = false;
     private LinearLayout expandableContent;
     private int mTextResource;
     private int mTitleResource;
 
-    public CardItem(int title, int text) {
+    public PrescriptionCardItem(int title, int text) {
         mTitleResource = title;
         mTextResource = text;
     }

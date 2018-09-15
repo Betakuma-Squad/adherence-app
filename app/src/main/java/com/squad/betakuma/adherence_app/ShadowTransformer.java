@@ -4,17 +4,17 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.view.View;
 
-import com.squad.betakuma.adherence_app.SwipableCards.CardAdapter;
+import com.squad.betakuma.adherence_app.swipable_cards.PrescriptionCardAdapter;
 
 
 public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPager.PageTransformer {
 
     private ViewPager mViewPager;
-    private CardAdapter mAdapter;
+    private PrescriptionCardAdapter mAdapter;
     private float mLastOffset;
     private boolean mScalingEnabled;
 
-    public ShadowTransformer(ViewPager viewPager, CardAdapter adapter) {
+    public ShadowTransformer(ViewPager viewPager, PrescriptionCardAdapter adapter) {
         mViewPager = viewPager;
         viewPager.addOnPageChangeListener(this);
         mAdapter = adapter;
@@ -81,7 +81,7 @@ public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPa
                 currentCard.setScaleY((float) (1 + 0.1 * (1 - realOffset)));
             }
             currentCard.setCardElevation((baseElevation + baseElevation
-                    * (CardAdapter.MAX_ELEVATION_FACTOR - 1) * (1 - realOffset)));
+                    * (PrescriptionCardAdapter.MAX_ELEVATION_FACTOR - 1) * (1 - realOffset)));
         }
 
         CardView nextCard = mAdapter.getCardViewAt(nextPosition);
@@ -94,7 +94,7 @@ public class ShadowTransformer implements ViewPager.OnPageChangeListener, ViewPa
                 nextCard.setScaleY((float) (1 + 0.1 * (realOffset)));
             }
             nextCard.setCardElevation((baseElevation + baseElevation
-                    * (CardAdapter.MAX_ELEVATION_FACTOR - 1) * (realOffset)));
+                    * (PrescriptionCardAdapter.MAX_ELEVATION_FACTOR - 1) * (realOffset)));
         }
 
         mLastOffset = positionOffset;
