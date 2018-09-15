@@ -1,6 +1,5 @@
 package com.squad.betakuma.adherence_app.SwipableCards;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -17,11 +16,10 @@ import com.squad.betakuma.adherence_app.ShadowTransformer;
  */
 
 public class MedicationDetailActivity extends AppCompatActivity {
-    private ViewPager mViewPager;
 
+    private ViewPager mViewPager;
     private CardPagerAdapter mCardAdapter;
     private ShadowTransformer mCardShadowTransformer;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,11 +30,6 @@ public class MedicationDetailActivity extends AppCompatActivity {
         mViewPager.setPageMargin(-30);
 
         mCardAdapter = new CardPagerAdapter(this, mViewPager);
-        mCardAdapter.addCardItem(new CardItem(R.string.title_1, R.string.text_1));
-        mCardAdapter.addCardItem(new CardItem(R.string.title_2, R.string.text_1));
-        mCardAdapter.addCardItem(new CardItem(R.string.title_3, R.string.text_1));
-        mCardAdapter.addCardItem(new CardItem(R.string.title_4, R.string.text_1));
-
 
         mCardShadowTransformer = new ShadowTransformer(mViewPager, mCardAdapter);
 
