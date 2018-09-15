@@ -1,0 +1,58 @@
+{
+  "project_info": {
+    "project_number": "987564343544",
+    "firebase_url": "https://adherence-app-e2025.firebaseio.com",
+    "project_id": "adherence-app-e2025",
+    "storage_bucket": "adherence-app-e2025.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987564343544:android:6542aefdbbc4cffa",
+        "android_client_info": {
+          "package_name": "com.squad.betakua.adherence_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "987564343544-1jurh9b58uun3b6bq8fq7vjkoij98het.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.squad.betakua.adherence_app",
+            "certificate_hash": "3b9b1747e827359d46fbeb08c7379f8c9e651548"
+          }
+        },
+        {
+          "client_id": "987564343544-kvrj7b4gorh7tng4tme9psedd8qd4q6v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-T9ZPBtbmbYNmWConckEjv3wCE0vTsxU"
+        },
+        {
+          "current_key": "AIzaSyB-T9ZPBtbmbYNmWConckEjv3wCE0vTsxU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "987564343544-kvrj7b4gorh7tng4tme9psedd8qd4q6v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
