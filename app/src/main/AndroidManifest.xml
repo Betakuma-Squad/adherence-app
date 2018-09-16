@@ -3,6 +3,7 @@
     package="com.squad.betakuma.adherence_app">
 
     <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -23,6 +24,9 @@
         <activity
             android:name=".ocr.OcrCaptureActivity"
             android:label="Read Text" />
+        <receiver android:name=".notifications.AlarmReceiver"
+            android:enabled="true">
+        </receiver>
     </application>
 
 </manifest>
