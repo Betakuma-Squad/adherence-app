@@ -55,6 +55,10 @@ public class PrescriptionCardItem {
         return prescription.getMedication().getGenericName();
     }
 
+    public String getDosage() {
+        return prescription.getMedication().getDose();
+    }
+
     public String getSubtitle() {
         Medication m = prescription.getMedication();
         return m.getBrandName() + ", " + m.getDIN();

@@ -1,5 +1,6 @@
 package com.squad.betakuma.adherence_app.swipable_cards;
 
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.support.transition.TransitionManager;
 import android.support.v4.view.PagerAdapter;
@@ -13,14 +14,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.squad.betakuma.adherence_app.R;
 import com.squad.betakuma.adherence_app.data_model.DataListener;
 import com.squad.betakuma.adherence_app.data_model.DataManager;
 import com.squad.betakuma.adherence_app.data_model.Prescription;
+import com.squad.betakuma.adherence_app.notifications.AlarmReceiver;
+import com.squad.betakuma.adherence_app.notifications.NotificationScheduler;
 import com.squad.betakuma.adherence_app.utilities.Installation;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class PrescriptionCardPagerAdapter extends PagerAdapter implements PrescriptionCardAdapter, DataListener {
@@ -180,9 +185,11 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
             public void onClick(View view) {
                 if (item.shouldSendNotifications()) {
                     item.setShouldSendNotifications(false);
+                    NotificationScheduler.cancelReminder(mContext, AlarmReceiver.class);
                     notificationImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.inactive_icon));
                 } else {
                     item.setShouldSendNotifications(true);
+                    showTimePickerDialog(item);
                     notificationImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.notification_selected));
                 }
             }
@@ -197,6 +204,22 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
                 mContext.getResources().getIdentifier(mContext.getPackageName() + ":drawable/" + item.getImageFileName(),
                         null,
                         null));
+    }
+
+    private void showTimePickerDialog(final PrescriptionCardItem item) {
+        Calendar mcurrentTime = Calendar.getInstance();
+        int hour = mcurrentTime.get(Calendar.HOUR_OF_DAY);
+        int minute = mcurrentTime.get(Calendar.MINUTE);
+        TimePickerDialog mTimePicker;
+        mTimePicker = new TimePickerDialog(mContext, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                NotificationScheduler.setReminder(mContext,AlarmReceiver.class,
+                        selectedHour, selectedMinute, item.getTitle(), item.getDosage());
+            }
+        }, hour, minute, true);//Yes 24 hour time
+        mTimePicker.setTitle("Select Time");
+        mTimePicker.show();
     }
 
 }
