@@ -12,7 +12,7 @@ import com.squad.betakuma.adherence_app.survey.SurveyView;
  * Created by sherryuan on 2018-09-14.
  */
 
-public class MedicationDetailActivity extends AppCompatActivity implements  CardTapListener {
+public class MedicationDetailActivity extends AppCompatActivity implements CardTapListener {
     public static final String POSITION = "position";
 
     private ViewPager mViewPager;
