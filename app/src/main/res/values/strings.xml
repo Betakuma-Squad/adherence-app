@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">adherence-app</string>
+    <string name="app_name">Koshu</string>
 
     <string name="title_1">Cool card</string>
     <string name="title_2">Ok card</string>
     <string name="title_3">Bad card</string>
     <string name="title_4">Ugly card</string>
 
-    <string name="text_1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum.</string>
+    <string name="text_1">Lorem \n\n\\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum.</string>
     <string name="ok">OK</string>
     <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
     <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
@@ -19,5 +19,4 @@
     <string name="ocr_success">Text read successfully</string>
     <string name="ocr_failure">No text captured</string>
     <string name="ocr_error">"Error reading text: %1$s"</string>
->>>>>>> copied stuff from codelab
 </resources>
