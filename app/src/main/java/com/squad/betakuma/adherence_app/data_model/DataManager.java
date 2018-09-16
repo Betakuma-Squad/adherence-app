@@ -31,7 +31,7 @@ public class DataManager {
 
     private DataManager(@NonNull final String id) {
         Log.d("DEBUG", "THIS IS THE ID: " + id);
-        userId = id;
+        userId = "53ba0031-8e58-4b85-9a5b-ef8c5c416bf5";
         reloadData();
     }
 

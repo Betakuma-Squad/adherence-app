@@ -8,6 +8,7 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -101,10 +102,14 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
     }
 
     private void bind(final PrescriptionCardItem item, final View parentView) {
-        TextView titleTextView = (TextView) parentView.findViewById(R.id.titleTextView);
-        TextView contentTextView = (TextView) parentView.findViewById(R.id.contentTextView);
+        ImageView image = parentView.findViewById(R.id.medication_image);
+        TextView titleText = parentView.findViewById(R.id.medication_title);
+        TextView subtitleText = parentView.findViewById(R.id.medication_subtitle);
+        TextView collapsedText = parentView.findViewById(R.id.collapsed_content);
         LinearLayout expandableContent = parentView.findViewById(R.id.card_expanded_content);
-        CardView cardView = (CardView) parentView.findViewById(R.id.cardView);
+        TextView expandedFullText = parentView.findViewById(R.id.expanded_full_text);
+        CardView cardView = parentView.findViewById(R.id.cardView);
+        item.setCollapsedContent(collapsedText);
         item.setExpandableContent(expandableContent);
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,8 +127,15 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
                 }
             }
         });
-        titleTextView.setText(item.getTitle());
-        contentTextView.setText(item.getText());
+        titleText.setText(item.getTitle());
+        subtitleText.setText(item.getSubtitle());
+        collapsedText.setText(item.getText().replace("\\n", "\n"));
+        expandedFullText.setText(item.getText().replace("\\n", "\n"));
+
+        image.setImageResource(
+                mContext.getResources().getIdentifier(mContext.getPackageName() + ":drawable/" + item.getImageFileName(),
+                        null,
+                        null));
     }
 
 }

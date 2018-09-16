@@ -3,6 +3,7 @@ package com.squad.betakuma.adherence_app.swipable_cards;
 
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.squad.betakuma.adherence_app.data_model.Medication;
 import com.squad.betakuma.adherence_app.data_model.Prescription;
@@ -12,6 +13,7 @@ import lombok.NonNull;
 public class PrescriptionCardItem {
 
     private boolean isExpanded = false;
+    private TextView collapsedContent;
     private LinearLayout expandableContent;
     @NonNull final private Prescription prescription;
 
@@ -25,6 +27,10 @@ public class PrescriptionCardItem {
 
     public void setExpanded(boolean isExpanded) {
         this.isExpanded = isExpanded;
+    }
+
+    public void setCollapsedContent(TextView collapsedContent) {
+        this.collapsedContent = collapsedContent;
     }
 
     public void setExpandableContent(LinearLayout expandableContent) {
@@ -41,14 +47,19 @@ public class PrescriptionCardItem {
     }
 
     public String getText() {
-        return "";
-        //return prescription.getMedication().getDescription();
+        return prescription.getMedication().getDescription();
+    }
+
+    public String getImageFileName() {
+        return "m" + prescription.getMedication().getDIN();
     }
 
     public void toggleExpanded() {
         if (isExpanded) {
+            collapsedContent.setVisibility(View.VISIBLE);
             expandableContent.setVisibility(View.GONE);
         } else {
+            collapsedContent.setVisibility(View.GONE);
             expandableContent.setVisibility(View.VISIBLE);
         }
         isExpanded = !isExpanded;
