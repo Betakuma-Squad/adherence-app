@@ -100,23 +100,24 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
 
     }
 
-    private void bind(final PrescriptionCardItem item, View view) {
-        TextView titleTextView = (TextView) view.findViewById(R.id.titleTextView);
-        TextView contentTextView = (TextView) view.findViewById(R.id.contentTextView);
-        LinearLayout expandableContent = view.findViewById(R.id.card_expanded_content);
+    private void bind(final PrescriptionCardItem item, final View parentView) {
+        TextView titleTextView = (TextView) parentView.findViewById(R.id.titleTextView);
+        TextView contentTextView = (TextView) parentView.findViewById(R.id.contentTextView);
+        LinearLayout expandableContent = parentView.findViewById(R.id.card_expanded_content);
+        CardView cardView = (CardView) parentView.findViewById(R.id.cardView);
         item.setExpandableContent(expandableContent);
-        view.setOnClickListener(new View.OnClickListener() {
+        cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TransitionManager.beginDelayedTransition((ViewGroup) view);
+                TransitionManager.beginDelayedTransition((ViewGroup) parentView);
                 item.toggleExpanded();
                 mCardTapListener.onCardTap();
                 // TODO: make this less hacky
-                if (view.getPaddingLeft() > 0) {
-                    view.setPadding(-30, 0, -30, 0);
+                if (parentView.getPaddingLeft() > 0) {
+                    parentView.setPadding(-30, 0, -30, 0);
 
                 } else {
-                    view.setPadding(mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), mContext.getResources().getDimensionPixelSize(R.dimen.card_padding));
+                    parentView.setPadding(mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), 0, mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), 0);
                 }
             }
         });

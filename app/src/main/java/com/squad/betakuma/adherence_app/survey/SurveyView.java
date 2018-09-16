@@ -15,27 +15,20 @@ import static com.squad.betakuma.adherence_app.swipable_cards.PrescriptionCardAd
  */
 
 public class SurveyView extends LinearLayout {
-    private float mBaseElevation;
-    private CardView cardView;
+    private LinearLayout surveyLayout;
     public SurveyView(Context context, AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.view_survey, this, true);
-        cardView = findViewById(R.id.survey_card);
-
-        if (mBaseElevation == 0) {
-            mBaseElevation = cardView.getCardElevation();
-        }
-
-        cardView.setCardElevation(MAX_ELEVATION_FACTOR);
+        surveyLayout = findViewById(R.id.survey_view);
     }
 
     public void setVisible(boolean isVisible) {
         if (isVisible) {
-            cardView.setVisibility(VISIBLE);
+            surveyLayout.setVisibility(VISIBLE);
         } else {
-            cardView.setVisibility(GONE);
+            surveyLayout.setVisibility(GONE);
         }
     }
 }
