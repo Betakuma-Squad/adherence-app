@@ -28,7 +28,6 @@ public class PrescriptionDetailActivity extends AppCompatActivity implements Car
 
         mViewPager = findViewById(R.id.viewPager);
         mSurveyView = findViewById(R.id.survey_view);
-        mViewPager.setPageMargin(-30);
 
         mCardAdapter = new PrescriptionCardPagerAdapter(this, mViewPager, this);
 

@@ -117,7 +117,8 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
                     parentView.setPadding(-30, 0, -30, 0);
 
                 } else {
-                    parentView.setPadding(mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), 0, mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), 0);
+//                    parentView.setPadding(0, 0, 0, 0);
+//                    parentView.setPadding(mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), 0, mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), 0);
                 }
             }
         });
