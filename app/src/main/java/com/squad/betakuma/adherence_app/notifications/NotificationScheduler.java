@@ -71,11 +71,9 @@ public class NotificationScheduler {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "koshu");
         Notification notification = builder
                 .setContentTitle("Reminder")
-                .setSubText(title)
+                .setContentText(title)
                 .setAutoCancel(true)
-                .setStyle(new android.support.v4.media.app.NotificationCompat.MediaStyle())
                 .setSound(alarmSound).setSmallIcon(R.mipmap.ic_launcher_round)
-                .addAction(new NotificationCompat.Action(R.drawable.pill_icon, "OK", null))
                 .setContentIntent(pendingIntent).build();
 
         NotificationManager notificationManager = (NotificationManager)
