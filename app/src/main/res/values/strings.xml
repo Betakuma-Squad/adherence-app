@@ -19,4 +19,7 @@
     <string name="ocr_success">Text read successfully</string>
     <string name="ocr_failure">No text captured</string>
     <string name="ocr_error">"Error reading text: %1$s"</string>
+    <string name="medication_img">Image of one particular medication</string>
+    <string name="quantity_pill_icon">Icon representing pill quantity remaining</string>
+    <string name="refills_vial_icon">Icon representing number of refills remaining</string>
 </resources>
