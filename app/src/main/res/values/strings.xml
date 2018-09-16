@@ -22,4 +22,5 @@
     <string name="medication_img">Image of one particular medication</string>
     <string name="quantity_pill_icon">Icon representing pill quantity remaining</string>
     <string name="refills_vial_icon">Icon representing number of refills remaining</string>
+    <string name="splash">Splash screen</string>
 </resources>

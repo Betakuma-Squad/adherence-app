@@ -10,6 +10,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import com.squad.betakuma.adherence_app.survey.SurveyResponse;
 
 import java.util.ArrayList;
@@ -32,6 +33,8 @@ public class DataManager {
     private DataManager(@NonNull final String id) {
         Log.d("DEBUG", "THIS IS THE ID: " + id);
         userId = "53ba0031-8e58-4b85-9a5b-ef8c5c416bf5";
+        //userId = id;
+        db.collection("users").document(id).set(new HashMap<String, Object>(), SetOptions.merge());
         reloadData();
     }
 
@@ -62,15 +65,15 @@ public class DataManager {
             prescriptions.add(prescription);
         }
         List<Map<String, Object>> prescriptionsMap = new ArrayList<>();
-        for (Prescription next: prescriptions) {
+        for (Prescription next : prescriptions) {
             prescriptionsMap.add(next.toMap());
         }
-        db.collection("users").document(userId).update("prescriptions",  prescriptionsMap)
+        db.collection("users").document(userId).update("prescriptions", prescriptionsMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Log.d(TAG, "Successfully updated firebase");
-                        for (DataListener next: listeners) {
+                        for (DataListener next : listeners) {
                             next.onDataUpdate();
                         }
                     }
@@ -96,10 +99,12 @@ public class DataManager {
                     if (doc.exists()) {
                         Log.d("DEBUG", doc.getData().toString());
                         ArrayList prescriptionsFirebase = (ArrayList) doc.getData().get("prescriptions");
-                        for (Object o : prescriptionsFirebase) {
-                            Log.d("DEBUG", o.toString());
-                            // TODO FIX THIS
-                            prescriptionFromFirebase((Map) o);
+                        if (prescriptionsFirebase != null) {
+                            for (Object o : prescriptionsFirebase) {
+                                Log.d("DEBUG", o.toString());
+                                // TODO FIX THIS
+                                prescriptionFromFirebase((Map) o);
+                            }
                         }
                     } else {
                         // TODO error handling
