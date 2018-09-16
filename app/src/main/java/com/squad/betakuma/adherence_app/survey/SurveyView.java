@@ -30,4 +30,12 @@ public class SurveyView extends LinearLayout {
 
         cardView.setCardElevation(MAX_ELEVATION_FACTOR);
     }
+
+    public void setVisible(boolean isVisible) {
+        if (isVisible) {
+            cardView.setVisibility(VISIBLE);
+        } else {
+            cardView.setVisibility(GONE);
+        }
+    }
 }

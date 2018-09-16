@@ -28,9 +28,11 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
     private List<PrescriptionCardItem> mData;
     private float mBaseElevation;
     private DataManager manager;
+    private CardTapListener mCardTapListener;
 
-    public PrescriptionCardPagerAdapter(Context context, ViewPager viewPager) {
+    public PrescriptionCardPagerAdapter(Context context, ViewPager viewPager, CardTapListener cardTapListener) {
         mContext = context;
+        mCardTapListener = cardTapListener;
         mParentViewPager = viewPager;
         mData = new ArrayList<>();
         mViews = new ArrayList<>();
@@ -108,6 +110,7 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
             public void onClick(View view) {
                 TransitionManager.beginDelayedTransition((ViewGroup) view);
                 item.toggleExpanded();
+                mCardTapListener.onCardTap();
                 // TODO: make this less hacky
                 if (view.getPaddingLeft() > 0) {
                     view.setPadding(-30, 0, -30, 0);
