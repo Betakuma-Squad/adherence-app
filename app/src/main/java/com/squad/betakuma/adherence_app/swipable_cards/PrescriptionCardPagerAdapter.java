@@ -5,11 +5,13 @@ import android.support.transition.TransitionManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.squad.betakuma.adherence_app.R;
@@ -102,6 +104,10 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
     }
 
     private void bind(final PrescriptionCardItem item, final View parentView) {
+        final LinearLayout expanded = parentView.getRootView().findViewById(R.id.card_expanded_content);
+        final ScrollView scrollView = parentView.getRootView().findViewById(R.id.scrollView);
+        scrollView.setPadding(0, 20, 0, 0);
+
         ImageView image = parentView.findViewById(R.id.medication_image);
         TextView titleText = parentView.findViewById(R.id.medication_title);
         TextView subtitleText = parentView.findViewById(R.id.medication_subtitle);
@@ -124,6 +130,12 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
                 } else {
 //                    parentView.setPadding(0, 0, 0, 0);
 //                    parentView.setPadding(mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), 0, mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), 0);
+                }
+
+                if (expanded.getVisibility() == View.GONE) {
+                    scrollView.setPadding(0, 320, 0, 0);
+                } else {
+                    scrollView.setPadding(0, 20, 0, 0);
                 }
             }
         });
