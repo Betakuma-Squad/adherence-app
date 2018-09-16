@@ -28,7 +28,7 @@ public class SurveyView extends LinearLayout {
         if (isVisible) {
             surveyLayout.setVisibility(VISIBLE);
         } else {
-            surveyLayout.setVisibility(GONE);
+            surveyLayout.setVisibility(INVISIBLE);
         }
     }
 }

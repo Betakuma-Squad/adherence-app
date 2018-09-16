@@ -82,6 +82,8 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
         container.addView(view);
         bind(mData.get(position), view);
         CardView cardView = (CardView) view.findViewById(R.id.cardView);
+        final ScrollView scrollView = cardView.getRootView().findViewById(R.id.scrollView);
+//        scrollView.setY(300);
 
         if (mBaseElevation == 0) {
             mBaseElevation = cardView.getCardElevation();
@@ -106,7 +108,7 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
     private void bind(final PrescriptionCardItem item, final View parentView) {
         final LinearLayout expanded = parentView.getRootView().findViewById(R.id.card_expanded_content);
         final ScrollView scrollView = parentView.getRootView().findViewById(R.id.scrollView);
-        scrollView.setPadding(0, 20, 0, 0);
+//        scrollView.setY(300);
 
         ImageView image = parentView.findViewById(R.id.medication_image);
         TextView titleText = parentView.findViewById(R.id.medication_title);
@@ -132,11 +134,7 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
 //                    parentView.setPadding(mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), 0, mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), 0);
                 }
 
-                if (expanded.getVisibility() == View.GONE) {
-                    scrollView.setPadding(0, 320, 0, 0);
-                } else {
-                    scrollView.setPadding(0, 20, 0, 0);
-                }
+//                scrollView.setY(300);
             }
         });
         titleText.setText(item.getTitle());
