@@ -43,14 +43,14 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.text.TextRecognizer;
 import com.squad.betakuma.adherence_app.R;
-import com.squad.betakuma.adherence_app.swipable_cards.MedicationDetailActivity;
+import com.squad.betakuma.adherence_app.swipable_cards.PrescriptionDetailActivity;
 import com.squad.betakuma.adherence_app.ui.camera.CameraSource;
 import com.squad.betakuma.adherence_app.ui.camera.CameraSourcePreview;
 import com.squad.betakuma.adherence_app.ui.camera.GraphicOverlay;
 
 import java.io.IOException;
 
-import static com.squad.betakuma.adherence_app.swipable_cards.MedicationDetailActivity.POSITION;
+import static com.squad.betakuma.adherence_app.swipable_cards.PrescriptionDetailActivity.POSITION;
 
 /**
  * Activity for the Ocr Detecting app.  This app detects text and displays the value with the
@@ -327,7 +327,7 @@ public final class OcrCaptureActivity extends AppCompatActivity implements OcrPr
 
     @Override
     public void onPrescriptionFound(int position) {
-        Intent medicationDetailActivityIntent = new Intent(this, MedicationDetailActivity.class);
+        Intent medicationDetailActivityIntent = new Intent(this, PrescriptionDetailActivity.class);
         medicationDetailActivityIntent.putExtra(POSITION, position);
         startActivity(medicationDetailActivityIntent);
         finish();

@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.squad.betakuma.adherence_app.swipable_cards.MedicationDetailActivity;
 import com.squad.betakuma.adherence_app.swipable_cards.PrescriptionDetailActivity;
 import com.squad.betakuma.adherence_app.data_model.DataListener;
 import com.squad.betakuma.adherence_app.data_model.Medication;
@@ -19,7 +18,7 @@ import com.squad.betakuma.adherence_app.utilities.Installation;
 
 import lombok.NonNull;
 
-import static com.squad.betakuma.adherence_app.swipable_cards.MedicationDetailActivity.POSITION;
+import static com.squad.betakuma.adherence_app.swipable_cards.PrescriptionDetailActivity.POSITION;
 
 /**
  * Created by sherryuan on 2018-09-14.
@@ -98,7 +97,7 @@ public class PrescriptionListAdapter extends RecyclerView.Adapter<PrescriptionLi
         holder.mListItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent medicationDetailActivityIntent = new Intent(mContext, MedicationDetailActivity.class);
+                Intent medicationDetailActivityIntent = new Intent(mContext, PrescriptionDetailActivity.class);
                 medicationDetailActivityIntent.putExtra(POSITION, position);
                 mContext.startActivity(medicationDetailActivityIntent);
             }
