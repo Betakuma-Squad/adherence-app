@@ -13,6 +13,7 @@ import lombok.NonNull;
 public class PrescriptionCardItem {
 
     private boolean isExpanded = false;
+    private boolean shouldSendNotifications = false;
     private TextView collapsedContent;
     private LinearLayout expandableContent;
     @NonNull final private Prescription prescription;
@@ -31,6 +32,14 @@ public class PrescriptionCardItem {
 
     public void setCollapsedContent(TextView collapsedContent) {
         this.collapsedContent = collapsedContent;
+    }
+
+    public boolean shouldSendNotifications() {
+        return shouldSendNotifications;
+    }
+
+    public void setShouldSendNotifications(boolean shouldSendNotifications) {
+        this.shouldSendNotifications = shouldSendNotifications;
     }
 
     public void setExpandableContent(LinearLayout expandableContent) {

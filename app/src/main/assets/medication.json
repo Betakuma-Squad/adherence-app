@@ -84,6 +84,7 @@
     "surveyResponses": []
   },
   "Docusate sodium Capsules": {
+    "shouldSendNotifications": "true",
     "quantity": "3",
     "totalQuantity": "5",
     "refills": "3",
@@ -98,6 +99,7 @@
     "surveyResponses": []
   },
   "Apo Acetaminophen": {
+    "shouldSendNotifications": "true",
     "quantity": "3",
     "totalQuantity": "5",
     "refills": "2",
@@ -112,6 +114,7 @@
     "surveyResponses": []
   },
   "Centrum Multivitamin": {
+    "shouldSendNotifications": "true",
     "quantity": "20",
     "totalQuantity": "30",
     "refills": "30",
@@ -126,6 +129,7 @@
     "surveyResponses": []
   },
   "Ventolin HFA": {
+    "shouldSendNotifications": "true",
     "quantity": "43",
     "totalQuantity": "34",
     "refills": "2",
@@ -140,6 +144,7 @@
     "surveyResponses": []
   },
   "Advair Diskus": {
+    "shouldSendNotifications": "true",
     "quantity": "34",
     "totalQuantity": "35",
     "refills": "2",

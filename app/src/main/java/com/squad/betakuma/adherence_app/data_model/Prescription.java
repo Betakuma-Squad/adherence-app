@@ -13,6 +13,7 @@ import lombok.NonNull;
 @Data
 // data model representation of a single prescription
 public class Prescription {
+    final boolean shouldSendNotifications;
     final long quantity;
     final long totalQuantity;
     final long refills;
@@ -23,6 +24,7 @@ public class Prescription {
 
     public Map<String, Object> toMap() {
         Map<String, Object> map = new HashMap<>();
+        map.put("shouldSendNotifications", shouldSendNotifications);
         map.put("instructions", instructions);
         map.put("medication", medication.DIN);
         map.put("quantity", quantity);

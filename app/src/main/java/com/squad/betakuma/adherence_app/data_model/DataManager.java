@@ -114,6 +114,7 @@ public class DataManager {
     // asynchronously convert from Firebase results to Prescription POJO
     // NOTE: this is asynchronous because it has to look up the attached medicine in Firebase
     private void prescriptionFromFirebase(@NonNull final Map firebaseObject) {
+        final boolean shouldSendNotifications = (boolean) firebaseObject.get("shouldSendNotifications");
         final long quantity = (long) firebaseObject.get("quantity");
         final long totalQuantity = (long) firebaseObject.get("totalQuantity");
         final long refills = (long) firebaseObject.get("refills");
@@ -135,7 +136,9 @@ public class DataManager {
                 if (task.isSuccessful()) {
                     DocumentSnapshot doc = task.getResult();
                     if (doc.exists()) {
-                        prescriptions.add(new Prescription(quantity,
+                        prescriptions.add(new Prescription(
+                                shouldSendNotifications,
+                                quantity,
                                 totalQuantity,
                                 refills,
                                 totalRefills,

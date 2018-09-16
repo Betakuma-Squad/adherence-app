@@ -127,6 +127,26 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
                 }
             }
         });
+
+
+        final ImageView notificationImage = parentView.findViewById(R.id.notification_image);
+        if (item.shouldSendNotifications()) {
+            notificationImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.notification_selected));
+        } else {
+            notificationImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.inactive_icon));
+        }
+        notificationImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (item.shouldSendNotifications()) {
+                    item.setShouldSendNotifications(false);
+                    notificationImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.inactive_icon));
+                } else {
+                    item.setShouldSendNotifications(true);
+                    notificationImage.setImageDrawable(mContext.getResources().getDrawable(R.drawable.notification_selected));
+                }
+            }
+        });
         titleText.setText(item.getTitle());
         subtitleText.setText(item.getSubtitle());
         collapsedText.setText(item.getText().replace("\\n", "\n"));
