@@ -9,8 +9,11 @@
     android:paddingRight="5dp">
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:translationY="90dp"
         android:scrollbars="vertical">
 
         <android.support.v7.widget.CardView

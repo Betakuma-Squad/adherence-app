@@ -5,11 +5,13 @@ import android.support.transition.TransitionManager;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.squad.betakuma.adherence_app.R;
@@ -80,6 +82,8 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
         container.addView(view);
         bind(mData.get(position), view);
         CardView cardView = (CardView) view.findViewById(R.id.cardView);
+        final ScrollView scrollView = cardView.getRootView().findViewById(R.id.scrollView);
+//        scrollView.setY(300);
 
         if (mBaseElevation == 0) {
             mBaseElevation = cardView.getCardElevation();
@@ -102,6 +106,10 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
     }
 
     private void bind(final PrescriptionCardItem item, final View parentView) {
+        final LinearLayout expanded = parentView.getRootView().findViewById(R.id.card_expanded_content);
+        final ScrollView scrollView = parentView.getRootView().findViewById(R.id.scrollView);
+//        scrollView.setY(300);
+
         ImageView image = parentView.findViewById(R.id.medication_image);
         TextView titleText = parentView.findViewById(R.id.medication_title);
         TextView subtitleText = parentView.findViewById(R.id.medication_subtitle);
@@ -125,6 +133,8 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
 //                    parentView.setPadding(0, 0, 0, 0);
 //                    parentView.setPadding(mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), 0, mContext.getResources().getDimensionPixelSize(R.dimen.card_padding), 0);
                 }
+
+//                scrollView.setY(300);
             }
         });
 
