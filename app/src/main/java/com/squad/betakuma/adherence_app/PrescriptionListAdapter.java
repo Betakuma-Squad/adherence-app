@@ -18,6 +18,8 @@ import com.squad.betakuma.adherence_app.utilities.Installation;
 
 import lombok.NonNull;
 
+import static com.squad.betakuma.adherence_app.swipable_cards.MedicationDetailActivity.POSITION;
+
 /**
  * Created by sherryuan on 2018-09-14.
  */
@@ -79,7 +81,7 @@ public class PrescriptionListAdapter extends RecyclerView.Adapter<PrescriptionLi
             @Override
             public void onClick(View v) {
                 Intent medicationDetailActivityIntent = new Intent(mContext, MedicationDetailActivity.class);
-                // TODO: pass in medication info as extra
+                medicationDetailActivityIntent.putExtra(POSITION, position);
                 mContext.startActivity(medicationDetailActivityIntent);
             }
         });

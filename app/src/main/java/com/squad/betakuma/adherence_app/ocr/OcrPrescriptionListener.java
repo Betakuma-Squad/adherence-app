@@ -5,5 +5,5 @@ package com.squad.betakuma.adherence_app.ocr;
  */
 
 public interface OcrPrescriptionListener {
-    void onPrescriptionFound();
+    void onPrescriptionFound(int position);
 }

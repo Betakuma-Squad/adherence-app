@@ -25,7 +25,7 @@ import com.squad.betakuma.adherence_app.data_model.DataManager;
 import com.squad.betakuma.adherence_app.data_model.Medication;
 import com.squad.betakuma.adherence_app.data_model.Prescription;
 import com.squad.betakuma.adherence_app.data_model.SideEffectRarity;
-import com.squad.betakuma.adherence_app.data_model.SurveyResponse;
+import com.squad.betakuma.adherence_app.survey.SurveyResponse;
 import com.squad.betakuma.adherence_app.ui.camera.GraphicOverlay;
 import com.squad.betakuma.adherence_app.utilities.Installation;
 
@@ -66,6 +66,7 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
     }
 
     private void parsePrescription(TextBlock item) {
+        DataManager dataManager = DataManager.getInstance(Installation.id(context));
         if (item.getValue().contains("ramipril")) {
             Prescription ramiprilPrescription = new Prescription(
                     120,
@@ -92,8 +93,8 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
                             "older and have serious heart disease.",
                     new ArrayList<SurveyResponse>()
             );
-            DataManager.getInstance(Installation.id(context)).addPrescription(ramiprilPrescription);
-            ocrPrescriptionListener.onPrescriptionFound();
+            dataManager.addPrescription(ramiprilPrescription);
+            ocrPrescriptionListener.onPrescriptionFound(dataManager.getDataset().length - 1);
         } else if (item.getValue().contains("advil")) {
             Prescription advilPrescription = new Prescription(
                     120,
@@ -104,8 +105,8 @@ public class OcrDetectorProcessor implements Detector.Processor<TextBlock> {
                     "test",
                     new ArrayList<SurveyResponse>()
             );
-            DataManager.getInstance(Installation.id(context)).addPrescription(advilPrescription);
-            ocrPrescriptionListener.onPrescriptionFound();
+            dataManager.addPrescription(advilPrescription);
+            ocrPrescriptionListener.onPrescriptionFound(dataManager.getDataset().length - 1);
         }
     }
 

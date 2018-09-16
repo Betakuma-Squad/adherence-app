@@ -12,6 +12,7 @@ import com.squad.betakuma.adherence_app.ShadowTransformer;
  */
 
 public class MedicationDetailActivity extends AppCompatActivity {
+    public static final String POSITION = "position";
 
     private ViewPager mViewPager;
     private PrescriptionCardPagerAdapter mCardAdapter;
@@ -32,5 +33,7 @@ public class MedicationDetailActivity extends AppCompatActivity {
         mViewPager.setAdapter(mCardAdapter);
         mViewPager.setPageTransformer(false, mCardShadowTransformer);
         mViewPager.setOffscreenPageLimit(3);
+        int position = getIntent().getIntExtra(POSITION, 0);
+        mViewPager.setCurrentItem(position);
     }
 }

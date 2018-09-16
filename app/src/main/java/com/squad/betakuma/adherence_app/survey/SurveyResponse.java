@@ -1,4 +1,4 @@
-package com.squad.betakuma.adherence_app.data_model;
+package com.squad.betakuma.adherence_app.survey;
 
 import lombok.Data;
 import lombok.NonNull;

@@ -8,10 +8,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squad.betakuma.adherence_app.survey.SurveyResponse;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import lombok.NonNull;
@@ -55,20 +58,29 @@ public class DataManager {
     }
 
     public void addPrescription(Prescription prescription) {
-        db.collection("users").document(userId).collection("prescriptions").add(prescription)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+        if (!prescriptions.contains(prescription)) {
+            prescriptions.add(prescription);
+        }
+        List<Map<String, Object>> prescriptionsMap = new ArrayList<>();
+        for (Prescription next: prescriptions) {
+            prescriptionsMap.add(next.toMap());
+        }
+        db.collection("users").document(userId).update("prescriptions",  prescriptionsMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        reloadData();
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "Successfully updated firebase");
+                        for (DataListener next: listeners) {
+                            next.onDataUpdate();
+                        }
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing document", e);
+                        Log.d(TAG, "Error writing document", e);
                     }
-                });;
-        reloadData();
+                });
 
     }
 
