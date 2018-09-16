@@ -1,12 +1,17 @@
 package com.squad.betakuma.adherence_app.swipable_cards;
 
 
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squad.betakuma.adherence_app.data_model.Medication;
 import com.squad.betakuma.adherence_app.data_model.Prescription;
+import com.squad.betakuma.adherence_app.data_model.SideEffectRarity;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 import lombok.NonNull;
 
@@ -57,6 +62,29 @@ public class PrescriptionCardItem {
 
     public String getText() {
         return prescription.getMedication().getDescription();
+    }
+
+    public String getSideEffects() {
+        String result = "";
+        Map<SideEffectRarity, ArrayList<String>> map = prescription.getMedication().getSideEffects();
+        ArrayList<String> sideEffects;
+
+        for (Map.Entry<SideEffectRarity, ArrayList<String>> se : map.entrySet()) {
+            result += se.getKey();
+            result += "\n";
+
+            sideEffects = se.getValue();
+
+            for (int i = 0; i < sideEffects.size(); i++) {
+                result += "- ";
+                result += sideEffects.get(i);
+                result += "\n";
+            }
+
+            result += "\n";
+        }
+
+        return result;
     }
 
     public String getImageFileName() {

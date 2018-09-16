@@ -118,6 +118,7 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
 
         final LinearLayout expandableContent = parentView.findViewById(R.id.card_expanded_content);
         final TextView expandedFullText = parentView.findViewById(R.id.expanded_full_text);
+        final TextView expandedSideEffects = parentView.findViewById(R.id.expanded_side_effects);
         CardView cardView = parentView.findViewById(R.id.cardView);
         ImageView translateButton = parentView.findViewById(R.id.translate_button);
         translateButton.setOnClickListener(new View.OnClickListener() {
@@ -131,14 +132,18 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
                                     + "雷米普利也用于心脏病发作后的一些患者。心脏病发作后，一些心肌受损并减弱。随着时间的推移，心肌可能继续减弱。这使得心脏泵血更加困难。雷米普利可在心脏病发作后的最初几天内开始，以提高存活率。\n\n"
                                     + "雷米普利还用于减轻55岁或以上患者发生心脏病或中风的机会，并患有严重的心脏病。";
                     final String ramiprilTitleChinese = "雷米普利";
+                    final String ramiprilSideEffectsChinese = "雷米普利";
+                    titleText.setText(ramiprilTitleChinese);
                     collapsedText.setText(ramiprilChinese);
                     expandedFullText.setText(ramiprilChinese);
-                    titleText.setText(ramiprilTitleChinese);
+                    // TODO
+                    expandedSideEffects.setText(ramiprilSideEffectsChinese);
                 } else if (item.getTitle().equals("Ramipril") && !isEnglish) {
                     isEnglish = true;
                     titleText.setText(item.getTitle());
                     collapsedText.setText(item.getText().replace("\\n", "\n"));
                     expandedFullText.setText(item.getText().replace("\\n", "\n"));
+                    expandedSideEffects.setText(item.getSideEffects().replace("\\n", "\n"));
                 }
             }
         });
@@ -186,6 +191,7 @@ public class PrescriptionCardPagerAdapter extends PagerAdapter implements Prescr
         subtitleText.setText(item.getSubtitle());
         collapsedText.setText(item.getText().replace("\\n", "\n"));
         expandedFullText.setText(item.getText().replace("\\n", "\n"));
+        expandedSideEffects.setText(item.getSideEffects().replace("\\n", "\n"));
 
         image.setImageResource(
                 mContext.getResources().getIdentifier(mContext.getPackageName() + ":drawable/" + item.getImageFileName(),
